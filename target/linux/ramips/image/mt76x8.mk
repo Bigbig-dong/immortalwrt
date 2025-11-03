@@ -1383,6 +1383,15 @@ define Device/xiaomi_miwifi-nano
 endef
 TARGET_DEVICES += xiaomi_miwifi-nano
 
+define Device/meizu_mz-r18
+  IMAGE_SIZE := 16064k
+  DEVICE_VENDOR := Meizu
+  DEVICE_MODEL := mz r18
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-usb-net kmod-usb-net-rndis kmod-usb-net-cdc-ether kmod-usb-storage usbutils
+  SUPPORTED_DEVICES += mz-r18
+endef
+TARGET_DEVICES += meizu_mz-r18
+
 define Device/xiaomi_mi-ra75
   IMAGE_SIZE := 14976k
   DEVICE_VENDOR := Xiaomi
