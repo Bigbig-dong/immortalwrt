@@ -3,8 +3,8 @@
 #include "mt7628an.dtsi"
 
 / {
-    compatible = "mz,mz-r18", "mediatek,mt7628an-soc";
-    model = "mz r18";
+    compatible = "meizu,mz-r18", "mediatek,mt7628an-soc";
+    model = "meizu r18";
 
     memory@0 {
         device_type = "memory";
