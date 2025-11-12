@@ -4,7 +4,7 @@
 
 / {
 	compatible = "meizu,r18", "mediatek,mt7628an-soc";
-	model = "Meizu R18";
+	model = "meizu r18";
 
 	aliases {
 		led-boot = &led_status;
@@ -155,7 +155,7 @@
 
 &pcie0 {
 	wifi@0,0 {
-		compatible = "mediatek,mt7612e";
+		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
 		nvmem-cells = <&eeprom_factory_8000>, <&macaddr_factory_e000 1>;
 		nvmem-cell-names = "eeprom", "mac-address";
