@@ -139,8 +139,8 @@
 };
 
 &esw {
-	mediatek,portmap = <0x3d>;
-	mediatek,portdisable = <0x3c>;
+	mediatek,portmap = <0x3f>;
+	mediatek,portdisable = <0x3e>;
 };
 
 &wmac {
@@ -155,7 +155,7 @@
 
 &pcie0 {
 	wifi@0,0 {
-		compatible = "mediatek,mt7612e"; // MT7612EN
+		compatible = "mediatek,mt7612e";
 		reg = <0x0000 0 0 0 0>;
 		nvmem-cells = <&eeprom_factory_8000>, <&macaddr_factory_e000 1>;
 		nvmem-cell-names = "eeprom", "mac-address";
