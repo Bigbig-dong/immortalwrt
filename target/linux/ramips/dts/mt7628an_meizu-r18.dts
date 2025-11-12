@@ -144,8 +144,8 @@
 };
 
 &esw {
-	mediatek,portmap = <0x3f>;
-	mediatek,portdisable = <0x3e>;
+	mediatek,portmap = <0x3d>;
+	mediatek,portdisable = <0x3c>;
 };
 
 // MT7628内置2.4G无线
