@@ -20,7 +20,7 @@
 
 	memory@0 {
 		device_type = "memory";
-		reg = <0x0 0x8000000>; // 128MB RAM
+		reg = <0x0 0x8000000>;
 	};
 
 	gpio-keys {
@@ -87,17 +87,14 @@
 					#address-cells = <1>;
 					#size-cells = <1>;
 
-					// 2.4G EEPROM数据 (MT7628内置)
 					eeprom_factory_0: eeprom@0 {
 						reg = <0x0 0x1000>;
 					};
 
-					// 5G EEPROM数据 (MT7612EN)
 					eeprom_factory_8000: eeprom@8000 {
 						reg = <0x8000 0x1000>;
 					};
 
-					// LAN MAC地址
 					macaddr_factory_e000: macaddr@e000 {
 						compatible = "mac-base";
 						reg = <0xe000 0x6>;
@@ -106,14 +103,12 @@
 				};
 			};
 
-			// 主固件分区
 			partition@50000 {
 				compatible = "denx,uimage";
 				label = "firmware";
 				reg = <0x50000 0xfa0000>;
 			};
 
-			// 配置分区2
 			partition@ff0000 {
 				label = "config2";
 				reg = <0xff0000 0x10000>;
@@ -148,14 +143,12 @@
 	mediatek,portdisable = <0x3c>;
 };
 
-// MT7628内置2.4G无线
 &wmac {
 	status = "okay";
 	nvmem-cells = <&eeprom_factory_0>, <&macaddr_factory_e000 0>;
 	nvmem-cell-names = "eeprom", "mac-address";
 };
 
-// PCIe for MT7612EN 5G无线
 &pcie {
 	status = "okay";
 };
