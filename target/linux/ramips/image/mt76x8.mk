@@ -1387,7 +1387,7 @@ define Device/meizu_r18
   IMAGE_SIZE := 16000k
   DEVICE_VENDOR := meizu
   DEVICE_MODEL := r18
-  DEVICE_PACKAGES := kmod-mt7612e kmod-usb2 kmod-usb-ohci kmod-usb-net kmod-usb-net-rndis kmod-usb-net-cdc-ether kmod-usb-storage usbutils
+  DEVICE_PACKAGES := kmod-mt7612e kmod-usb2 kmod-usb-net kmod-usb-net-rndis kmod-usb-net-cdc-ether kmod-usb-storage
   SUPPORTED_DEVICES += r18
 endef
 TARGET_DEVICES += meizu_r18
