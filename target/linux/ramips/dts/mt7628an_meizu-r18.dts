@@ -48,31 +48,31 @@
 };
 
 &spi0 {
-	status = "okay";
+    status = "okay";
 
-	flash@0 {
-		compatible = "jedec,spi-nor";
-		reg = <0>;
-		spi-max-frequency = <40000000>;
+    flash@0 {
+        compatible = "jedec,spi-nor";
+        reg = <0>;
+        spi-max-frequency = <50000000>;
 
-		partitions {
-			compatible = "fixed-partitions";
-			#address-cells = <1>;
-			#size-cells = <1>;
+        partitions {
+            compatible = "fixed-partitions";
+            #address-cells = <1>;
+            #size-cells = <1>;
 
-			partition@0 {
-				label = "u-boot";
-				reg = <0x00000 0x30000>;
-				read-only;
-			};
+            partition@0 {
+                label = "u-boot";
+                reg = <0x000000 0x030000>;  // 192KB
+                read-only;
+            };
 
-			partition@30000 {
-				label = "u-boot-env";
-				reg = <0x30000 0x10000>;
-				read-only;
-			};
+            partition@30000 {
+                label = "config";
+                reg = <0x030000 0x010000>;  // 64KB
+                read-only;
+            };
 
-			partition@40000 {
+            partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
 				read-only;
@@ -83,59 +83,53 @@
 					#size-cells = <1>;
 
 					eeprom_factory_0: eeprom@0 {
-						reg = <0x0 0x1000>;
+						reg = <0x0 0x200>;
 					};
 
 					eeprom_factory_8000: eeprom@8000 {
-						reg = <0x8000 0x1000>;
+						reg = <0x8000 0x200>;
 					};
 
 					macaddr_factory_e000: macaddr@e000 {
-						compatible = "mac-base";
 						reg = <0xe000 0x6>;
-						#nvmem-cell-cells = <1>;
 					};
 				};
 			};
 
-			partition@50000 {
-				compatible = "denx,uimage";
-				label = "firmware";
-				reg = <0x50000 0xfb0000>;
-			};
+            partition@50000 {
+                compatible = "openwrt,uimage", "denx,uimage";
+                label = "firmware";
+                reg = <0x050000 0xfa0000>;  // 15.625MB
+            };
 
-		};
-	};
+            partition@ff0000 {
+                label = "config2";
+                reg = <0xff0000 0x010000>;  // 64KB
+                read-only;
+            };
+        };
+    };
 };
 
-&state_default {
-	gpio {
-		groups = "i2c", "gpio", "wdt";
-		function = "gpio";
-	};
-};
-
-&uart1 {
+&ehci {
 	status = "okay";
 };
 
-&uart2 {
+&ohci {
 	status = "okay";
 };
 
 &ethernet {
-	nvmem-cells = <&macaddr_factory_e000 0>;
+	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
+
+    mediatek,portmap = "llllw";
 };
 
-&esw {
-	mediatek,portmap = <0x5a>;
-	mediatek,portdisable = <0x25>;
-};
 
 &wmac {
 	status = "okay";
-	nvmem-cells = <&eeprom_factory_0>, <&macaddr_factory_e000 0>;
+	nvmem-cells = <&eeprom_factory_0>, <&macaddr_factory_e000>;
 	nvmem-cell-names = "eeprom", "mac-address";
 };
 
@@ -144,11 +138,17 @@
 };
 
 &pcie0 {
-	wifi@0,0 {
-		compatible = "mediatek,mt76";
+	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
-		nvmem-cells = <&eeprom_factory_8000>, <&macaddr_factory_e000 1>;
-		nvmem-cell-names = "eeprom", "mac-address";
+		nvmem-cells = <&eeprom_factory_8000>;
+		nvmem-cell-names = "eeprom";
 		ieee80211-freq-limit = <5000000 6000000>;
+	};
+};
+
+&state_default {
+	gpio {
+		groups = "ephy", "i2c", "rgmii1";
+		function = "gpio";
 	};
 };
