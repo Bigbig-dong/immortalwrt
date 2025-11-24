@@ -122,10 +122,7 @@
 &ethernet {
 	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
-};
-
-&esw {
-	mediatek,portmap = <0x1b>;
+    mediatek,portmap = "wlll";
 };
 
 &wmac {
