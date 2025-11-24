@@ -7,43 +7,14 @@
 #include <dt-bindings/leds/common.h>
 
 / {
-	aliases {
-		led-boot = &led_wps;
-		led-failsafe = &led_wps;
-		led-running = &led_wps;
-		led-upgrade = &led_wps;
-		label-mac-device = &ethernet;
-	};
 
 	keys {
 		compatible = "gpio-keys";
 
 		reset {
 			label = "reset";
-			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
-		};
-
-		wps {
-			label = "wps";
-			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
-			linux,code = <KEY_WPS_BUTTON>;
-		};
-	};
-
-	leds {
-		compatible = "gpio-leds";
-
-		led_wps: wps {
-			function = LED_FUNCTION_WPS;
-			color = <LED_COLOR_ID_BLUE>;
-			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
-		};
-
-		wlan2g {
-			label = "blue:wlan2g";
-			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-			linux,default-trigger = "phy0tpt";
 		};
 	};
 };
@@ -54,7 +25,7 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
-		spi-max-frequency = <58000000>;
+		spi-max-frequency = <50000000>;
 		m25p,fast-read;
 
 		partitions {
@@ -93,7 +64,7 @@
 					};
 
 					macaddr_factory_4: macaddr@4 {
-						reg = <0x4 0x6>;
+						reg = <0xe000 0x6>;
 					};
 				};
 			};
@@ -107,15 +78,6 @@
 	};
 };
 
-&gpio {
-	enable-leds {
-		gpio-hog;
-		line-name = "enable-leds";
-		output-low;
-		gpios = <4 GPIO_ACTIVE_HIGH>;
-	};
-};
-
 &ethernet {
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
@@ -123,7 +85,6 @@
 
 &esw {
 	mediatek,portmap = <0x3e>;
-	mediatek,led_source = <4>;
 };
 
 &wmac {
@@ -144,10 +105,5 @@
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
 		ieee80211-freq-limit = <5000000 6000000>;
-
-		led {
-			led-sources = <2>;
-			led-active-low;
-		};
 	};
 };
