@@ -53,7 +53,7 @@
     flash@0 {
         compatible = "jedec,spi-nor";
         reg = <0>;
-        spi-max-frequency = <50000000>;
+        spi-max-frequency = <40000000>;
 
         partitions {
             compatible = "fixed-partitions";
@@ -99,13 +99,7 @@
             partition@50000 {
                 compatible = "openwrt,uimage", "denx,uimage";
                 label = "firmware";
-                reg = <0x050000 0xfa0000>;  // 15.625MB
-            };
-
-            partition@ff0000 {
-                label = "config2";
-                reg = <0xff0000 0x010000>;  // 64KB
-                read-only;
+                reg = <0x050000 0xfb0000>;  // 15.625MB
             };
         };
     };
@@ -142,12 +136,5 @@
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
 		ieee80211-freq-limit = <5000000 6000000>;
-	};
-};
-
-&state_default {
-	gpio {
-		groups = "ephy", "i2c", "rgmii1";
-		function = "gpio";
 	};
 };
