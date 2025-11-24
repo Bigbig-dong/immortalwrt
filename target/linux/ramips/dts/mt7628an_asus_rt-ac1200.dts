@@ -9,18 +9,6 @@
 / {
 	compatible = "asus,rt-ac1200", "mediatek,mt7628an-soc";
 	model = "Asus RT-AC1200";
-
-	leds {
-		compatible = "gpio-leds";
-
-		usb {
-			function = LED_FUNCTION_USB;
-			color = <LED_COLOR_ID_BLUE>;
-			gpios = <&gpio 6 GPIO_ACTIVE_HIGH>;
-			trigger-sources = <&ohci_port1>, <&ehci_port1>;
-			linux,default-trigger = "usbport";
-		};
-	};
 };
 
 &state_default {
