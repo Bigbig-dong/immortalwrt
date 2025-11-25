@@ -17,7 +17,7 @@
 	};
 
 	chosen {
-		bootargs = "console=ttyS0,115200";
+		bootargs = "console=ttyS1,115200";
 	};
 
 	keys {
@@ -90,7 +90,7 @@
 						reg = <0x8000 0x200>;
 					};
 
-					macaddr_factory_e000: macaddr@e000 {
+					macaddr_factory_4: macaddr@4 {
 						reg = <0xe000 0x6>;
 					};
 				};
@@ -99,22 +99,14 @@
             partition@50000 {
                 compatible = "openwrt,uimage", "denx,uimage";
                 label = "firmware";
-                reg = <0x050000 0xfb0000>;  // 15.625MB
+                reg = <0x050000 0xfb0000>;  
             };
         };
     };
 };
 
-&ehci {
-	status = "okay";
-};
-
-&ohci {
-	status = "okay";
-};
-
 &ethernet {
-	nvmem-cells = <&macaddr_factory_e000>;
+	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
     mediatek,portmap = "wlll";
 };
@@ -136,5 +128,12 @@
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
 		ieee80211-freq-limit = <5000000 6000000>;
+	};
+};
+
+&state_default {
+	gpio {
+		groups = "i2c", "spi cs1", "refclk", "wled_an";
+		function = "gpio";
 	};
 };
