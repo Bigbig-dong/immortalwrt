@@ -69,7 +69,7 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"1:lan" "2:lan" "3:lan" "4:lan" "0:wan" "6@eth0"
 		;;
-    meizu,meizu-r18)
+    meizu,r18)
 		ucidef_add_switch "switch0" \
 			"3:lan:2" "1:lan:1" "4:wan" "6@eth0"
 		;;
