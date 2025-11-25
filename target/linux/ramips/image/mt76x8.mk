@@ -79,6 +79,14 @@ define Device/alfa-network_awusfree1
 endef
 TARGET_DEVICES += alfa-network_awusfree1
 
+define Device/meizu_r18
+  IMAGE_SIZE := 16064k
+  DEVICE_VENDOR := meizu
+  DEVICE_MODEL := r18
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci 
+endef
+TARGET_DEVICES += meizu_r18
+
 define Device/asus_rt-ac1200
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := ASUS
@@ -89,6 +97,7 @@ define Device/asus_rt-ac1200
 	kmod-usb-ledtrig-usbport
 endef
 TARGET_DEVICES += asus_rt-ac1200
+
 
 define Device/asus_rt-ac1200-v2
   IMAGE_SIZE := 16064k
@@ -278,7 +287,6 @@ define Device/elecom_wrc-1167fs
 	xor-image -p 29944A25 -x | elecom-header 00228000 | \
 	elecom-product-header WRC-1167FS
   DEVICE_PACKAGES := kmod-mt76x2
-  DEFAULT := n
 endef
 TARGET_DEVICES += elecom_wrc-1167fs
 
@@ -373,15 +381,6 @@ define Device/hongdian_h7920-v40
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
 endef
 TARGET_DEVICES += hongdian_h7920-v40
-
-define Device/huasifei_shf283
-   IMAGE_SIZE := 16064k
-   DEVICE_VENDOR := Huasifei
-   DEVICE_MODEL := SHF283
-   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-net-cdc-mbim \
-	kmod-usb-net-qmi-wwan kmod-usb-net-rndis kmod-usb-serial-option uqmi
-endef
-TARGET_DEVICES += huasifei_shf283
 
 define Device/iptime_a3
   IMAGE_SIZE := 7936k
@@ -795,7 +794,6 @@ define Device/tplink_archer-c20-v5
   TPLINK_HWREVADD := 0x5
   DEVICE_PACKAGES := kmod-mt76x0e
   IMAGES := sysupgrade.bin
-  DEFAULT := n
 endef
 TARGET_DEVICES += tplink_archer-c20-v5
 
@@ -827,7 +825,6 @@ define Device/tplink_archer-c50-v4
   DEVICE_PACKAGES := kmod-mt76x2
   IMAGES := sysupgrade.bin
   SUPPORTED_DEVICES += tplink,c50-v4
-  DEFAULT := n
 endef
 TARGET_DEVICES += tplink_archer-c50-v4
 
@@ -836,12 +833,13 @@ define Device/tplink_archer-c50-v6
   IMAGE_SIZE := 7616k
   DEVICE_MODEL := Archer C50
   DEVICE_VARIANT := v6 (CA/EU/RU)
+  DEVICE_ALT0_MODEL := Archer A5
+  DEVICE_ALT0_VARIANT := v6 (CA/EU/RU)
   TPLINK_FLASHLAYOUT := 8MSUmtk
   TPLINK_HWID := 0x0C500006
   TPLINK_HWREVADD := 0x6
   DEVICE_PACKAGES := kmod-mt7615e kmod-mt7663-firmware-ap
   IMAGES := sysupgrade.bin
-  DEFAULT := n
 endef
 TARGET_DEVICES += tplink_archer-c50-v6
 
@@ -1167,7 +1165,6 @@ define Device/tplink_tl-wr902ac-v4
 	kmod-usb-ledtrig-usbport
   IMAGES := sysupgrade.bin tftp-recovery.bin
   IMAGE/tftp-recovery.bin := pad-extra 128k | $$(IMAGE/factory.bin)
-  DEFAULT := n
 endef
 TARGET_DEVICES += tplink_tl-wr902ac-v4
 
@@ -1382,15 +1379,6 @@ define Device/xiaomi_miwifi-nano
   SUPPORTED_DEVICES += miwifi-nano
 endef
 TARGET_DEVICES += xiaomi_miwifi-nano
-
-define Device/meizu_r18
-  IMAGE_SIZE := 16000k
-  DEVICE_VENDOR := meizu
-  DEVICE_MODEL := r18
-  DEVICE_PACKAGES := kmod-mt7612e kmod-usb2 kmod-usb-net kmod-usb-net-rndis kmod-usb-net-cdc-ether kmod-usb-storage
-  SUPPORTED_DEVICES += r18
-endef
-TARGET_DEVICES += meizu_r18
 
 define Device/xiaomi_mi-ra75
   IMAGE_SIZE := 14976k
